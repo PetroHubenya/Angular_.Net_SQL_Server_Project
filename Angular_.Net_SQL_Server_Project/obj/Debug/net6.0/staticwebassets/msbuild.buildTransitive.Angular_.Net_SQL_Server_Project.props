@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Angular_.Net_SQL_Server_Project.props" />
+</Project>
