@@ -11,10 +11,12 @@ namespace Angular_.Net_SQL_Server_Project.Controllers
     public class EmployeesController : ControllerBase
     {
         public readonly IConfiguration _configuration;
+        public readonly IWebHostEnvironment _webHostEnvironment;
 
-        public EmployeesController(IConfiguration configuration)
+        public EmployeesController(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             _configuration = configuration;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -145,6 +147,31 @@ namespace Angular_.Net_SQL_Server_Project.Controllers
             }
 
             return new JsonResult("Delete Successfully");
+        }
+
+        [Route("SaveFile")]
+        [HttpPost]
+
+        public JsonResult SaveFile()
+        {
+            try
+            {
+                var httpRequest = Request.Form;
+                var postedFile = httpRequest.Files[0];
+                string fileName = postedFile.FileName;
+                var physicalPath = _webHostEnvironment.ContentRootPath + "/Photos/" + fileName;
+
+                using(var stream = new FileStream(physicalPath, FileMode.Create))
+                {
+                    postedFile.CopyTo(stream);
+                }
+
+                return new JsonResult(fileName);
+            }
+            catch (Exception)
+            {
+                return new JsonResult("anonymous.phg");
+            }
         }
     }
 }
