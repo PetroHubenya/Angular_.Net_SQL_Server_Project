@@ -13,6 +13,10 @@ export class DepartmentComponent {
 
   departments: any=[]
 
+  modalTitle = "";
+  DepartmentId = 0;
+  DepartmentName = "";
+
   ngOnInit(): void {
     this.refreshList();
   }
@@ -23,4 +27,17 @@ export class DepartmentComponent {
       this.departments = data;
     });
   }
+
+  addClick(){
+    this.modalTitle = "Add Department";
+    this.DepartmentId = 0;
+    this.DepartmentName = "";
+  }
+
+  editClick(dep:any){
+    this.modalTitle = "Edit Department";
+    this.DepartmentId = dep.DepartmentId;
+    this.DepartmentName = dep.DepartmentName;
+  }
+
 }
