@@ -40,4 +40,37 @@ export class DepartmentComponent {
     this.DepartmentName = dep.DepartmentName;
   }
 
+  createClick(){
+    var val = {
+      DepartmentName: this.DepartmentName
+    }
+    this.http.post(environment.API_URL + "department", val)
+    .subscribe(res => {
+      alert(res.toString());
+      this.refreshList();
+    });
+  }
+
+  updateClick(){
+    var val = {
+      DepartmentId: this.DepartmentId,
+      DepartmentName: this.DepartmentName
+    }
+    this.http.put(environment.API_URL + "department", val)
+    .subscribe(res => {
+      alert(res.toString());
+      this.refreshList();
+    });
+  }
+
+  deleteClick(id:any){
+    if (confirm('Are you sure?')){
+      this.http.delete(environment.API_URL + "department/" + id)
+      .subscribe(res => {
+          alert(res.toString());
+          this.refreshList();
+        }
+      );
+    }    
+  }
 }
