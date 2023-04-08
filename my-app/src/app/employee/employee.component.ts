@@ -63,7 +63,7 @@ export class EmployeeComponent {
       DateOfJoining: this.DateOfJoining,
       PhotoFileName: this.PhotoFileName
     }
-    this.http.post(environment.API_URL + "employee", val)
+    this.http.post(environment.API_URL + "employees", val)
     .subscribe(res => {
       alert(res.toString());
       this.refreshList();
@@ -78,7 +78,7 @@ export class EmployeeComponent {
       DateOfJoining: this.DateOfJoining,
       PhotoFileName: this.PhotoFileName
     }
-    this.http.put(environment.API_URL + "employee", val)
+    this.http.put(environment.API_URL + "employees", val)
     .subscribe(res => {
       alert(res.toString());
       this.refreshList();
@@ -87,12 +87,23 @@ export class EmployeeComponent {
 
   deleteClick(id:any){
     if (confirm('Are you sure?')){
-      this.http.delete(environment.API_URL + "employee/" + id)
+      this.http.delete(environment.API_URL + "employees/" + id)
       .subscribe(res => {
           alert(res.toString());
           this.refreshList();
         }
       );
     }    
+  }
+
+  imageUpload(event: any){
+    var file = event.target.files[0];
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+
+    this.http.post(environment.API_URL + 'employees/savefile', formData)
+    .subscribe((data: any) => {
+      this.PhotoFileName = data.toString();
+    });
   }
 }

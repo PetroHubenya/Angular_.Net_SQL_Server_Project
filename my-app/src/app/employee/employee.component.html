@@ -80,7 +80,7 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text">Department</span>
                             <select class="form-select" [(ngModel)]="Department">
-                                <option *ngFor="let dep in departments">
+                                <option *ngFor="let dep of departments">
                                     {{dep.DepartmentName}}
                                 </option>
                             </select>
@@ -90,19 +90,19 @@
                             <input type="date" class="form-control" [(ngModel)]="DateOfJoining">
                         </div>
                     </div>
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                        <img width="250px" height="250px" [src]="PhotoPath + PhotoFileName"/>
-                    </div>
-                    <div>
-                        <button type="button" (click)="createClick()" *ngIf="EmployeeId == 0" class="btn btn-primary">
-                            Create
-                        </button>
-        
-                        <button type="button" (click)="updateClick()" *ngIf="EmployeeId != 0" class="btn btn-primary">
-                            Update
-                        </button>
-                    </div>
-                </div>  
+                    <div class="p-2 w-50 bd-highlight">
+                        <img width="250px" height="250px" [src]="PhotoPath + PhotoFileName" />
+                        <input class="m-2" type="file" (change)="imageUpload($event)">
+                    </div>                    
+                </div>
+                <div>
+                    <button type="button" (click)="createClick()" *ngIf="EmployeeId == 0" class="btn btn-primary">
+                        Create
+                    </button>    
+                    <button type="button" (click)="updateClick()" *ngIf="EmployeeId != 0" class="btn btn-primary">
+                        Update
+                    </button>
+                </div>
             </div>
         </div>
     </div>
