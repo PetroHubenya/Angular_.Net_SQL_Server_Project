@@ -94,13 +94,13 @@ export class DepartmentComponent {
     );
   }
 
-  sortResult(prop:any, asc:any){
+  sortResult(prop:any,asc:any){
     this.departments = this.departmentsWithoutFilter.sort(function(a:any, b:any){
-      if (asc){
-        return (a[prop] > b[prop])?1: ((a[prop] < b[prop])? -1: 0);
+      if(asc){
+        return (a[prop]>b[prop])?1:((a[prop]<b[prop])?-1:0);
       }
       else{
-        return (b[prop] > a[prop])?1: ((b[prop] < a[prop])? -1: 0);
+        return(b[prop]>a[prop])?1:((b[prop]<a[prop])?-1:0);
       }
     });
   }
