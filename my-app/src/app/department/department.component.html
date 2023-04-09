@@ -11,9 +11,17 @@
     <thead>
         <tr>
             <th>
+                <input class="form-control m-2"
+                    [(ngModel)]="DepartmentIdFilter"
+                    (keyup)="FilterFn()"
+                    placeholder="Filter">
                 DepartmentId
             </th>
             <th>
+                <input class="form-control m-2"
+                    [(ngModel)]="DepartmentNameFilter"
+                    (keyup)="FilterFn()"
+                    placeholder="Filter">
                 DepartmentName
             </th>
             <th>
